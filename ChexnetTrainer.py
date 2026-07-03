@@ -14,7 +14,7 @@ from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 import torch.nn.functional as func
 
-from sklearn.metrics.ranking import roc_auc_score
+from sklearn.metrics import roc_auc_score
 
 from DensenetModels import DenseNet121
 from DensenetModels import DenseNet169
@@ -115,7 +115,7 @@ class ChexnetTrainer ():
         
         for batchID, (input, target) in enumerate (dataLoader):
                         
-            target = target.cuda(async = True)
+            target = target.cuda(non_blocking=True)
                  
             varInput = torch.autograd.Variable(input)
             varTarget = torch.autograd.Variable(target)         
@@ -140,7 +140,7 @@ class ChexnetTrainer ():
         
         for i, (input, target) in enumerate (dataLoader):
             
-            target = target.cuda(async=True)
+            target = target.cuda(non_blocking=True)
                  
             varInput = torch.autograd.Variable(input, volatile=True)
             varTarget = torch.autograd.Variable(target, volatile=True)    
