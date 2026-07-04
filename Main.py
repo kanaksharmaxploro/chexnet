@@ -16,6 +16,10 @@ def main ():
 
 def runTrain():
     
+    import pickle
+    with open('pos_weight.pkl', 'rb') as f:
+        pos_weight_tensor = pickle.load(f)
+    
     DENSENET121 = 'DENSE-NET-121'
     DENSENET169 = 'DENSE-NET-169'
     DENSENET201 = 'DENSE-NET-201'
@@ -51,7 +55,7 @@ def runTrain():
     pathModel = 'm-' + timestampLaunch + '.pth.tar'
     
     print ('Training NN architecture = ', nnArchitecture)
-    ChexnetTrainer.train(pathDirData, pathFileTrain, pathFileVal, nnArchitecture, nnIsTrained, nnClassCount, trBatchSize, trMaxEpoch, imgtransResize, imgtransCrop, timestampLaunch, None)
+    ChexnetTrainer.train(pathDirData, pathFileTrain, pathFileVal, nnArchitecture, nnIsTrained, nnClassCount, trBatchSize, trMaxEpoch, imgtransResize, imgtransCrop, timestampLaunch, None, pos_weight_tensor)
     
     print ('Testing the trained model')
     ChexnetTrainer.test(pathDirData, pathFileTest, pathModel, nnArchitecture, nnClassCount, nnIsTrained, trBatchSize, imgtransResize, imgtransCrop, timestampLaunch)

@@ -41,7 +41,7 @@ class ChexnetTrainer ():
     #---- launchTimestamp - date/time, used to assign unique name for the checkpoint file
     #---- checkpoint - if not None loads the model and continues training
 
-    def train (pathDirData, pathFileTrain, pathFileVal, nnArchitecture, nnIsTrained, nnClassCount, trBatchSize, trMaxEpoch, transResize, transCrop, launchTimestamp, checkpoint):
+    def train (pathDirData, pathFileTrain, pathFileVal, nnArchitecture, nnIsTrained, nnClassCount, trBatchSize, trMaxEpoch, transResize, transCrop, launchTimestamp, checkpoint, pos_weight_tensor=None):
 
 
         #-------------------- SETTINGS: NETWORK ARCHITECTURE
@@ -73,7 +73,10 @@ class ChexnetTrainer ():
         scheduler = ReduceLROnPlateau(optimizer, factor = 0.1, patience = 5, mode = 'min')
 
         #-------------------- SETTINGS: LOSS
-        loss = torch.nn.BCELoss(size_average = True)
+        if pos_weight_tensor is not None:
+            loss = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight_tensor.cuda())
+        else:
+            loss = torch.nn.BCEWithLogitsLoss()
 
         #---- Load checkpoint 
         if checkpoint != None:
