@@ -80,15 +80,15 @@ class ChexnetTrainer ():
             modelCheckpoint = torch.load(checkpoint)
             pattern = re.compile(
                 r'^(.*denselayer\d+\.(?:norm|relu|conv))\.((?:[12])\.(?:weight|bias|running_mean|running_var))$')
-        state_dict = modelCheckpoint['state_dict']
-        for key in list(state_dict.keys()):
-            res = pattern.match(key)
-            if res:
-                new_key = res.group(1) + res.group(2)
-                state_dict[new_key] = state_dict[key]
-                del state_dict[key]
-        model.load_state_dict(state_dict)
-        optimizer.load_state_dict(modelCheckpoint['optimizer'])
+            state_dict = modelCheckpoint['state_dict']
+            for key in list(state_dict.keys()):
+                res = pattern.match(key)
+                if res:
+                    new_key = res.group(1) + res.group(2)
+                    state_dict[new_key] = state_dict[key]
+                    del state_dict[key]
+            model.load_state_dict(state_dict)
+            optimizer.load_state_dict(modelCheckpoint['optimizer'])
 
 
         #---- TRAIN THE NETWORK

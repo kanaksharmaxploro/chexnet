@@ -9,8 +9,8 @@ from ChexnetTrainer import ChexnetTrainer
 
 def main ():
     
-    runTest()
-    #runTrain()
+    #runTest()
+    runTrain()
   
 #--------------------------------------------------------------------------------   
 
@@ -30,9 +30,9 @@ def runTrain():
     #---- Paths to the files with training, validation and testing sets.
     #---- Each file should contains pairs [path to image, output vector]
     #---- Example: images_011/00027736_001.png 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-    pathFileTrain = './dataset/train_1.txt'
-    pathFileVal = './dataset/val_1.txt'
-    pathFileTest = './dataset/test_1.txt'
+    pathFileTrain = './dataset/train_sample.txt'
+    pathFileVal = './dataset/val_sample.txt'
+    pathFileTest = './dataset/test_sample.txt'
     
     #---- Neural network parameters: type of the network, is it pre-trained 
     #---- on imagenet, number of classes
@@ -42,7 +42,7 @@ def runTrain():
     
     #---- Training settings: batch size, maximum number of epochs
     trBatchSize = 4
-    trMaxEpoch = 100
+    trMaxEpoch = 2
     
     #---- Parameters related to image transforms: size of the down-scaled image, cropped image
     imgtransResize = 256
