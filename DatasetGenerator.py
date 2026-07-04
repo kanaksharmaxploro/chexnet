@@ -33,7 +33,7 @@ class DatasetGenerator (Dataset):
           
                 lineItems = line.split()
                 
-                imagePath = os.path.join(pathImageDirectory, lineItems[0])
+                imagePath = os.path.join(pathImageDirectory, os.path.basename(lineItems[0]))
                 imageLabel = lineItems[1:]
                 imageLabel = [int(i) for i in imageLabel]
                 
