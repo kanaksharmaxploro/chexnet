@@ -108,7 +108,7 @@ class ChexnetTrainer ():
             timestampDate = time.strftime("%d%m%Y")
             timestampEND = timestampDate + '-' + timestampTime
 
-            scheduler.step(losstensor.data[0])
+            scheduler.step(losstensor.item())
 
             if lossVal < lossMIN:
                 lossMIN = lossVal    
@@ -148,19 +148,21 @@ class ChexnetTrainer ():
 
         losstensorMean = 0
 
-        for i, (input, target) in enumerate (dataLoader):
+        with torch.no_grad():
+            for i, (input, target) in enumerate (dataLoader):
 
-            target = target.cuda(non_blocking=True)
+                target = target.cuda(non_blocking=True)
 
-            varInput = torch.autograd.Variable(input, volatile=True)
-            varTarget = torch.autograd.Variable(target, volatile=True)    
-            varOutput = model(varInput)
+                varInput = input.cuda(non_blocking=True)
+                varTarget = target
 
-            losstensor = loss(varOutput, varTarget)
-            losstensorMean += losstensor
+                varOutput = model(varInput)
 
-            lossVal += losstensor.data[0]
-            lossValNorm += 1
+                losstensor = loss(varOutput, varTarget)
+                losstensorMean += losstensor
+
+                lossVal += losstensor.item()
+                lossValNorm += 1
 
         outLoss = lossVal / lossValNorm
         losstensorMean = losstensorMean / lossValNorm

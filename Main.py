@@ -41,7 +41,7 @@ def runTrain():
     nnClassCount = 14
     
     #---- Training settings: batch size, maximum number of epochs
-    trBatchSize = 4
+    trBatchSize = 2
     trMaxEpoch = 2
     
     #---- Parameters related to image transforms: size of the down-scaled image, cropped image
@@ -65,7 +65,7 @@ def runTest():
     nnArchitecture = 'DENSE-NET-121'
     nnIsTrained = True
     nnClassCount = 14
-    trBatchSize = 4
+    trBatchSize = 2
     imgtransResize = 256
     imgtransCrop = 224
     
