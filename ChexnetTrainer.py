@@ -244,9 +244,9 @@ class ChexnetTrainer ():
         #-------------------- SETTINGS: DATASET BUILDERS
         transformList = []
         transformList.append(transforms.Resize(transResize))
-        transformList.append(transforms.TenCrop(transCrop))
-        transformList.append(transforms.Lambda(lambda crops: torch.stack([transforms.ToTensor()(crop) for crop in crops])))
-        transformList.append(transforms.Lambda(lambda crops: torch.stack([normalize(crop) for crop in crops])))
+        transformList.append(transforms.CenterCrop(transCrop))
+        transformList.append(transforms.ToTensor())
+        transformList.append(normalize)
         transformSequence=transforms.Compose(transformList)
 
         datasetTest = DatasetGenerator(pathImageDirectory=pathDirData, pathDatasetFile=pathFileTest, transform=transformSequence)
@@ -262,14 +262,10 @@ class ChexnetTrainer ():
             target = target.cuda()
             outGT = torch.cat((outGT, target), 0)
 
-            bs, n_crops, c, h, w = input.size()
-
-            varInput = torch.autograd.Variable(input.view(-1, c, h, w).cuda(), volatile=True)
-
-            out = model(varInput)
-            outMean = out.view(bs, n_crops, -1).mean(1)
-
-            outPRED = torch.cat((outPRED, outMean.data), 0)
+            with torch.no_grad():
+                varInput = input.cuda(non_blocking=True)
+                out = model(varInput)
+                outPRED = torch.cat((outPRED, out.data), 0)
 
         aurocIndividual = ChexnetTrainer.computeAUROC(outGT, outPRED, nnClassCount)
         aurocMean = np.array(aurocIndividual).mean()
