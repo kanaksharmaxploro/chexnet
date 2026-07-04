@@ -34,9 +34,9 @@ def runTrain():
     #---- Paths to the files with training, validation and testing sets.
     #---- Each file should contains pairs [path to image, output vector]
     #---- Example: images_011/00027736_001.png 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-    pathFileTrain = './dataset/train_sample.txt'
-    pathFileVal = './dataset/val_sample.txt'
-    pathFileTest = './dataset/test_sample.txt'
+    pathFileTrain = './dataset/train_10k.txt'
+    pathFileVal = './dataset/val_2k.txt'
+    pathFileTest = './dataset/test_official.txt'
     
     #---- Neural network parameters: type of the network, is it pre-trained 
     #---- on imagenet, number of classes
@@ -45,8 +45,8 @@ def runTrain():
     nnClassCount = 14
     
     #---- Training settings: batch size, maximum number of epochs
-    trBatchSize = 2
-    trMaxEpoch = 2
+    trBatchSize = 8
+    trMaxEpoch = 5
     
     #---- Parameters related to image transforms: size of the down-scaled image, cropped image
     imgtransResize = 256
