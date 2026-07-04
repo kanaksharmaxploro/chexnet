@@ -128,6 +128,9 @@ class ChexnetTrainer ():
 
         for batchID, (input, target) in enumerate (dataLoader):
 
+            if batchID % 100 == 0:
+                print(f'Train batch {batchID}')
+
             target = target.cuda(non_blocking=True)
 
             varInput = torch.autograd.Variable(input)
