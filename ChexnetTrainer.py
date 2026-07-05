@@ -267,6 +267,10 @@ class ChexnetTrainer ():
 
             if i % 500 == 0:
                 print(f'Test batch {i}')
+                import gc
+                gc.collect()
+                import gc
+                gc.collect()
 
             outGT_list.append(target.cpu())
 
