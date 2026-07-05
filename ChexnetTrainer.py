@@ -226,7 +226,9 @@ class ChexnetTrainer ():
 
         model = torch.nn.DataParallel(model).cuda() 
 
+        print('Loading checkpoint...')
         modelCheckpoint = torch.load(pathModel)
+        print('Checkpoint loaded.')
         pattern = re.compile(
             r'^(.*denselayer\d+\.(?:norm|relu|conv))\.((?:[12])\.(?:weight|bias|running_mean|running_var))$')
         state_dict = modelCheckpoint['state_dict']
@@ -237,6 +239,7 @@ class ChexnetTrainer ():
                 state_dict[new_key] = state_dict[key]
                 del state_dict[key]
         model.load_state_dict(state_dict)
+        print('State dict loaded into model.')
 
         #-------------------- SETTINGS: DATA TRANSFORMS, TEN CROPS
         normalize = transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
@@ -249,8 +252,11 @@ class ChexnetTrainer ():
         transformList.append(normalize)
         transformSequence=transforms.Compose(transformList)
 
+        print('Building dataset...')
         datasetTest = DatasetGenerator(pathImageDirectory=pathDirData, pathDatasetFile=pathFileTest, transform=transformSequence)
+        print('Dataset built, size:', len(datasetTest))
         dataLoaderTest = DataLoader(dataset=datasetTest, batch_size=trBatchSize, num_workers=2, shuffle=False, pin_memory=True)
+        print('DataLoader ready. Starting test loop...')
 
         outGT = torch.FloatTensor().cuda()
         outPRED = torch.FloatTensor().cuda()
