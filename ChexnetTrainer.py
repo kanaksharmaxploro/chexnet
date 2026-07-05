@@ -258,8 +258,8 @@ class ChexnetTrainer ():
         dataLoaderTest = DataLoader(dataset=datasetTest, batch_size=trBatchSize, num_workers=2, shuffle=False, pin_memory=True)
         print('DataLoader ready. Starting test loop...')
 
-        outGT = torch.FloatTensor().cuda()
-        outPRED = torch.FloatTensor().cuda()
+        outGT_list = []
+        outPRED_list = []
 
         model.eval()
 
@@ -268,13 +268,15 @@ class ChexnetTrainer ():
             if i % 500 == 0:
                 print(f'Test batch {i}')
 
-            target = target.cuda()
-            outGT = torch.cat((outGT, target), 0)
+            outGT_list.append(target.cpu())
 
             with torch.no_grad():
                 varInput = input.cuda(non_blocking=True)
                 out = model(varInput)
-                outPRED = torch.cat((outPRED, out.data), 0)
+                outPRED_list.append(out.data.cpu())
+
+        outGT = torch.cat(outGT_list, 0).cuda()
+        outPRED = torch.cat(outPRED_list, 0).cuda()
 
         aurocIndividual = ChexnetTrainer.computeAUROC(outGT, outPRED, nnClassCount)
         aurocMean = np.array(aurocIndividual).mean()
