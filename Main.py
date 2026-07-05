@@ -9,8 +9,8 @@ from ChexnetTrainer import ChexnetTrainer
 
 def main ():
     
-    #runTest()
-    runTrain()
+    runTest()
+    #runTrain()
   
 #--------------------------------------------------------------------------------   
 
@@ -65,7 +65,7 @@ def runTrain():
 def runTest():
     
     pathDirData = '/kaggle/working/all_images'
-    pathFileTest = './dataset/test_1.txt'
+    pathFileTest = './dataset/test_official.txt'
     nnArchitecture = 'DENSE-NET-121'
     nnIsTrained = True
     nnClassCount = 14
@@ -73,7 +73,7 @@ def runTest():
     imgtransResize = 256
     imgtransCrop = 224
     
-    pathModel = './models/m-25012018-123527.pth.tar'
+    pathModel = './m-04072026-172922.pth.tar'
     
     timestampLaunch = ''
     

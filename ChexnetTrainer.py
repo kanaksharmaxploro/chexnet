@@ -265,6 +265,9 @@ class ChexnetTrainer ():
 
         for i, (input, target) in enumerate(dataLoaderTest):
 
+            if i % 500 == 0:
+                print(f'Test batch {i}')
+
             target = target.cuda()
             outGT = torch.cat((outGT, target), 0)
 
