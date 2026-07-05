@@ -1,0 +1,40 @@
+Total images combined: 25596
+
+AUROC mean  0.6648494375162685
+Atelectasis   0.6207549162383278
+Cardiomegaly   0.7174672779045014
+Effusion   0.7157403386579471
+Infiltration   0.6552944191488572
+Mass   0.566967654412346
+Nodule   0.6287792343095779
+Pneumonia   0.5657189956219547
+Pneumothorax   0.6846159737062563
+Consolidation   0.6641945910705157
+Edema   0.7389436333500214
+Emphysema   0.6013815587082546
+Fibrosis   0.7311962912864144
+Pleural_Thickening   0.6708037655682358
+Hernia   0.7460334752445461
+
+Precision / Recall / F1 (threshold=0.5) per class:
+Atelectasis Precision: 0.1492 Recall: 0.9012 F1: 0.2559
+Cardiomegaly Precision: 0.0692 Recall: 0.7334 F1: 0.1264
+Effusion Precision: 0.2458 Recall: 0.9025 F1: 0.3863
+Infiltration Precision: 0.3174 Recall: 0.7132 F1: 0.4393
+Mass Precision: 0.0838 Recall: 0.3804 F1: 0.1374
+Nodule Precision: 0.0949 Recall: 0.5176 F1: 0.1604
+Pneumonia Precision: 0.0260 Recall: 0.5676 F1: 0.0497
+Pneumothorax Precision: 0.1268 Recall: 0.8638 F1: 0.2211
+Consolidation Precision: 0.1062 Recall: 0.7824 F1: 0.1871
+Edema Precision: 0.0585 Recall: 0.8714 F1: 0.1096
+Emphysema Precision: 0.0448 Recall: 0.9881 F1: 0.0856
+Fibrosis Precision: 0.0351 Recall: 0.6713 F1: 0.0667
+Pleural_Thickening Precision: 0.0733 Recall: 0.6080 F1: 0.1307
+Hernia Precision: 0.0064 Recall: 0.7674 F1: 0.0127
+
+Mean Precision: 0.1027
+Mean Recall: 0.7334
+Mean F1: 0.1692
+
+Evaluation protocol: single center-crop, full official test split (25,596 images)
+Model: 3-epoch weighted BCE (BCEWithLogitsLoss with pos_weight), trained on 10,000-image sample

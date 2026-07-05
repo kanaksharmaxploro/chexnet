@@ -1,0 +1,38 @@
+AUROC mean  0.870161996064054
+Atelectasis   0.8323732765573677
+Cardiomegaly   0.9309627011152023
+Effusion   0.8670889131833784
+Infiltration   0.745751334193125
+Mass   0.898406116790781
+Nodule   0.8368692094276631
+Pneumonia   0.7864756933763762
+Pneumothorax   0.928972037247234
+Consolidation   0.80665152389753
+Edema   0.8974302688242131
+Emphysema   0.9529386005313538
+Fibrosis   0.8911100329966966
+Pleural_Thickening   0.8389016063418606
+Hernia   0.9683366304139736
+
+Precision / Recall / F1 (threshold=0.5) per class:
+Atelectasis Precision: 0.6199 Recall: 0.1790 F1: 0.2778
+Cardiomegaly Precision: 0.6046 Recall: 0.2947 F1: 0.3962
+Effusion Precision: 0.6511 Recall: 0.4227 F1: 0.5126
+Infiltration Precision: 0.5590 Recall: 0.2148 F1: 0.3104
+Mass Precision: 0.6116 Recall: 0.3135 F1: 0.4145
+Nodule Precision: 0.5690 Recall: 0.1245 F1: 0.2042
+Pneumonia Precision: 0.0 Recall: 0.0 F1: 0.0
+Pneumothorax Precision: 0.7085 Recall: 0.4360 F1: 0.5398
+Consolidation Precision: 0.5435 Recall: 0.0275 F1: 0.0524
+Edema Precision: 0.4956 Recall: 0.1222 F1: 0.1960
+Emphysema Precision: 0.5947 Recall: 0.5114 F1: 0.5499
+Fibrosis Precision: 0.2899 Recall: 0.0460 F1: 0.0794
+Pleural_Thickening Precision: 0.4802 Recall: 0.0849 F1: 0.1442
+Hernia Precision: 0.6526 Recall: 0.7209 F1: 0.6851
+
+Mean Precision: 0.5272
+Mean Recall: 0.2499
+Mean F1: 0.3116
+
+Evaluation protocol: single center-crop, full official test split (25,596 images)
+Model: original CheXNet pretrained checkpoint (unweighted BCE loss)
